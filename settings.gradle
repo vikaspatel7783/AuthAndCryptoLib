@@ -1,0 +1,3 @@
+include ':authandcrypto'
+include ':app'
+rootProject.name = "AuthAndCryptoLib"

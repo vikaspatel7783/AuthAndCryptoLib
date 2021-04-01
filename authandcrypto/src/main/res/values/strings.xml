@@ -1,0 +1,5 @@
+<resources>
+    <string name="prompt_info_title">Authentication</string>
+    <string name="prompt_info_subtitle">Please login to get access</string>
+    <string name="prompt_info_description">Library is using Android biometric authentication</string>
+</resources>
