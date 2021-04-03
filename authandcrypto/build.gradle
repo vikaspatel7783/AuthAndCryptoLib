@@ -1,6 +1,40 @@
 plugins {
     id 'com.android.library'
     id 'kotlin-android'
+    id 'maven-publish'
+}
+
+def githubCredentials = new Properties()
+githubCredentials.load(new FileInputStream(rootProject.file("github.properties")))
+
+publishing {
+    publications {
+        bar(MavenPublication) {
+            groupId "com.vikas.mobile"
+            artifactId "authandcrypto"
+            version "1.0.1"
+            artifact("$buildDir/outputs/aar/authandcrypto-release.aar")
+        }
+    }
+
+    repositories {
+        maven {
+            name = "GitHubPackages"
+            /** Configure path of your package repository on Github
+             ** Replace GITHUB_USERID with your/organisation Github userID
+             ** and REPOSITORY with the repository name on GitHub
+             */
+            url = uri("https://maven.pkg.github.com/vikaspatel7783/AuthAndCryptoLib")
+            credentials {
+                /** Create github.properties in root project folder file with
+                 ** gpr.usr=GITHUB_USER_ID & gpr.key=PERSONAL_ACCESS_TOKEN
+                 ** Set env variable GPR_USER & GPR_API_KEY if not adding a properties file**/
+
+                username = githubCredentials['gpr.usr']
+                password = githubCredentials['gpr.key']
+            }
+        }
+    }
 }
 
 android {
@@ -11,7 +45,7 @@ android {
         minSdkVersion 23
         targetSdkVersion 30
         versionCode 1
-        versionName "1.0"
+        versionName "1.0.0"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         consumerProguardFiles "consumer-rules.pro"
