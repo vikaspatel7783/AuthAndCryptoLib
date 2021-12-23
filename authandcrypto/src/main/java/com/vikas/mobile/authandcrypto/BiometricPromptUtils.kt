@@ -5,6 +5,7 @@ import androidx.biometric.BiometricManager
 import androidx.biometric.BiometricManager.Authenticators.BIOMETRIC_WEAK
 import androidx.biometric.BiometricManager.Authenticators.DEVICE_CREDENTIAL
 import androidx.biometric.BiometricPrompt
+import androidx.biometric.BiometricPrompt.ERROR_USER_CANCELED
 import androidx.core.content.ContextCompat
 
 /**
@@ -36,11 +37,15 @@ object BiometricPromptUtils {
         val callback = object : BiometricPrompt.AuthenticationCallback() {
 
             override fun onAuthenticationError(errCode: Int, errString: CharSequence) {
-                // TODO: check need
+                if (errCode == ERROR_USER_CANCELED) {
+                    authCallback.onUserCancels()
+                } else {
+                    //TODO
+                }
             }
 
             override fun onAuthenticationFailed() {
-                // TODO: check need
+                //TODO
             }
 
             override fun onAuthenticationSucceeded(result: BiometricPrompt.AuthenticationResult) {

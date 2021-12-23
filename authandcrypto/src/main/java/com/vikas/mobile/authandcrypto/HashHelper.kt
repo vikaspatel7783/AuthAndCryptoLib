@@ -1,4 +1,4 @@
-package com.vikas.mobile.mysafenotes.authandcrypto
+package com.vikas.mobile.authandcrypto
 
 import java.security.MessageDigest
 

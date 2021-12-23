@@ -21,6 +21,11 @@ class MainActivity : AppCompatActivity() {
                         //TODO("To be better handled")
                         Toast.makeText(applicationContext, "Authentications not provided on this device", Toast.LENGTH_LONG).show()
                     }
+
+                    override fun onUserCancels() {
+                        finish()
+                    }
+
                 })
     }
 }
