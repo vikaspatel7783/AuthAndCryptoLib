@@ -21,8 +21,16 @@ import androidx.core.content.ContextCompat
 
 object BiometricPromptUtils {
 
+    /**
+     * This checks whether user has set PIN, Pattern, Password or Biometric to unlock device
+     */
+    fun isDeviceSecured(context: Context): Boolean {
+        //return (context.getSystemService(Context.KEYGUARD_SERVICE) as KeyguardManager).isDeviceSecure
+        return (BiometricManager.from(context).canAuthenticate(BIOMETRIC_WEAK or DEVICE_CREDENTIAL) == BiometricManager.BIOMETRIC_SUCCESS)
+    }
+
     fun showUserAuthentication(activity: AppCompatActivity, appAuthCallback: AppAuthCallback) {
-        if (BiometricManager.from(activity).canAuthenticate(BIOMETRIC_WEAK or DEVICE_CREDENTIAL) == BiometricManager.BIOMETRIC_SUCCESS) {
+        if (isDeviceSecured(activity)) {
             val biometricPrompt = createBiometricPrompt(activity, authCallback = appAuthCallback)
             val promptInfo = createPromptInfo(activity.applicationContext)
             biometricPrompt.authenticate(promptInfo)
