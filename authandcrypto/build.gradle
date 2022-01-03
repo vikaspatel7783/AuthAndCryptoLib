@@ -12,7 +12,7 @@ publishing {
         bar(MavenPublication) {
             groupId "com.vikas.mobile"
             artifactId "authandcrypto"
-            version "1.0.3"
+            version "1.0.4"
             artifact("$buildDir/outputs/aar/authandcrypto-release.aar")
 
             //generate .pom file with transitive dependencies
